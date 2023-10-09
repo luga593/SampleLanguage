@@ -2,8 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View, ScrollView } from 'react-native';
 import _ from "lodash";
 
-var XMPP = require('./xmpp.js/packages/client')
+import 'events';
 
+const XMPP = require('@xmpp/client');
+const debug = require("@xmpp/debug");
+
+
+//var client = require('./xmpp.js/packages/client');
 var base64 = require('base-64');
 global.btoa = base64.encode;
 global.atob = base64.decode;
@@ -17,22 +22,30 @@ export default class App extends React.Component {
         output: ''
     }
 
-    this.xmppClientListeners = [];
-    this.xmppClient = XMPP.xmpp().client;
+    //this.xmppClientListeners = [];
+    //this.xmppClient = XMPP.xmpp().client;
+    console.log('got here')
+    console.log('XMPP object: ',XMPP)
 
-    // you XMPP server endpoints
-    //
-    this.XMPPServerOptions = {uri: 'wss://chat.connectycube.com:5291',
-                           domain: 'chat.connectycube.com'};
 
-    // Demo user credentials
-    //
-    this.XMPPUserCredentials = {jidLocalPart: '25045-19', password: 'securepwd123'};
+    this.xmppClient = XMPP.client()
+
+    this.XMPPServerOptions = {
+    service: 'wss://chat.connectycube.com:7324',
+    domain: 'chat.connectycube.com'}
+    //Demo user credential VVV
+    this.XMPPUserCredentials = {jidLocalPart: '11019238@chat.connectycube.com',
+    password: 'pedroVanCuy'}
+    
+    
+   
   }
+
+
 
   onStartConnect() {
     this.addListeners();
-
+    
     this.connect(this.XMPPServerOptions);
   }
 

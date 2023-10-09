@@ -1,0 +1,14 @@
+use npm version 16 with nvm-windows
+npm install
+npm audit fix
+npm install --save-dev babel-plugin-transform-react-jsx-source
+clone git repo... 
+npm install @xmpp/client @xmpp/debug
+npm install koa-compose
+
+npm install saslmechanisms
+npm install sasl-anonymous
+npm install ltx
+npm install events
+npm install react-native-connectycube 
+

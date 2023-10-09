@@ -3,26 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-native-scripts": "1.14.0",
-    "jest-expo": "~27.0.0",
-    "react-test-renderer": "16.3.1"
+    "@babel/core": "^7.20.0",
+    "babel-plugin-transform-react-jsx-source": "^6.22.0",
+    "babel-preset-expo": "^9.5.2"
   },
-  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "react-native-scripts start",
-    "eject": "react-native-scripts eject",
-    "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios",
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
     "test": "jest"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
-    "expo": "^27.0.1",
-    "react": "16.3.1",
-    "react-native": "~0.55.2",
     "base-64": "^0.1.0",
-    "merge": ">=1.2.1"
+    "events": "^3.3.0",
+    "expo": "^49.0.11",
+    "koa-compose": "^4.1.0",
+    "ltx": "^3.0.0",
+    "merge": ">=1.2.1",
+    "react": "18.2.0",
+    "react-native": "^0.72.5",
+    "react-native-connectycube": "^3.27.2",
+    "sasl-anonymous": "^0.1.0",
+    "sasl-plain": "^0.1.0",
+    "saslmechanisms": "^0.1.1"
   }
 }

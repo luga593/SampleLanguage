@@ -1,5 +1,10 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "jsEngine": "hermes",
+    
+    "android": {
+      "package": "com.vanCuy.LanguageTest"
+      
+    }
   }
 }
