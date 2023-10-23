@@ -22,7 +22,7 @@ export default class App extends React.Component {
         output: ''
     }
 
-    //this.xmppClientListeners = [];
+    this.xmppClientListeners = [];
     //this.xmppClient = XMPP.xmpp().client;
     console.log('got here')
     console.log('XMPP object: ',XMPP)
@@ -36,22 +36,21 @@ export default class App extends React.Component {
     //Demo user credential VVV
     this.XMPPUserCredentials = {jidLocalPart: '11019238@chat.connectycube.com',
     password: 'pedroVanCuy'}
-    
-    
    
+
+    
   }
 
 
-
+ 
   onStartConnect() {
     this.addListeners();
-    
+    //const XMPPFullOptions = this.XMPPUserCredentials.jidLocalPart + "@" + this.XMPPServerOptions.domain; //< should be server op 9 credentials 
     this.connect(this.XMPPServerOptions);
   }
 
   onSendMessage() {
     // he we send a message for the same user
-
     var stanzaParams = {
      from: this.XMPPUserCredentials.jidLocalPart + "@" + this.XMPPServerOptions.domain,
      to: this.XMPPUserCredentials.jidLocalPart + "@" + this.XMPPServerOptions.domain,
@@ -69,12 +68,14 @@ export default class App extends React.Component {
 
   addListeners() {
     var self = this;
-
+    console.log('got to the listener')
     var removeAllListeners = function(){
-        self.xmppClientListeners.forEach(function(listener){
+      console.log('inside listenerloop1')
+        self.xmppClientListeners.forEach(function(listener){ //<<<< earlier I removed the list of listeners
           self.xmppClient.removeListener(listener.name, listener.callback);
         });
         self.xmppClientListeners = [];
+        
     }
 
     removeAllListeners();
@@ -152,19 +153,27 @@ export default class App extends React.Component {
     };
     this.xmppClient.on('input', callbackInput);
     this.xmppClientListeners.push({name: 'input', callback: callbackInput});
+    
+    //***************DELETE THIS BLOCK SOON */
+    // const callbackAuthenticate = function(authenticate) {
+    //   self.log('AUTHENTICATING');
 
-    const callbackAuthenticate = function(authenticate) {
-      self.log('AUTHENTICATING');
-
-      return authenticate(self.XMPPUserCredentials.jidLocalPart,
-        self.XMPPUserCredentials.password)
-    };
-    this.xmppClient.handle('authenticate', callbackAuthenticate);
-    this.xmppClientListeners.push({name: 'authenticate', callback: callbackAuthenticate});
+    //   return authenticate(self.XMPPUserCredentials.jidLocalPart,
+    //     self.XMPPUserCredentials.password)
+    // };
+    // console.log(this.xmppClient)
+    // this.xmppClient.handle('authenticate', callbackAuthenticate);
+    // this.xmppClientListeners.push({name: 'authenticate', callback: callbackAuthenticate});
   }
 
   connect(options){
-    this.xmppClient.start(options);
+    options.resource = this.XMPPUserCredentials.jidLocalPart;
+    options.username = this.XMPPUserCredentials.jidLocalPart.split('@')[0]; // assuming jidLocalPart contains the full JID
+    options.password = this.XMPPUserCredentials.password;
+    this.xmppClient.start(options).catch(console.error);
+    this.xmppClient.on("online", (address) =>{
+      console.log("online", address.toString());
+    } )
   }
 
   log(text){
