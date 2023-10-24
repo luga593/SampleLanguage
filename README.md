@@ -1,3 +1,8 @@
+JOE MMV LEE:
+
+you have to use this commands AFTER PULLING the git
+BEFORE you start Working.
+
 # Overview
 
 XMPP-based real-time chat in React Native app demo project  

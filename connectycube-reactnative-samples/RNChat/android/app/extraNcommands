@@ -1,0 +1,3 @@
+//commented out apply plugin: 'com.google.gms.google-services'. 
+//in line 357 of android/app/buid.graddle
+//commented out line 33 of android/build.gradle classpath(...) googleServicesVersions(...)
